@@ -30,26 +30,17 @@ let createAndSavePerson = (done) => {
 
 //Fixed error. document.save() needed anonymous function as a callback
   fuzzyBear.save((err, data) => {
-      console.log("we started the document.save function")
       if (err) {
         return console.error(err)
       } 
       done(null, data)  
     }) 
-   
- /*
-  fuzzyBear.save(function(err, data) {
-    console.log("we started the document.save function")
-    if (err) return console.error(err);
-    console.log("we got past the error if")
-    done(null, data)
-  }); */
 };
 
 
 //Create Many Records with model.create()
 
-//Create an array of people
+//Create an array of people-actually pets
 let arrayOfPeople = [
   {name: "Flufykins", age: 3, favoriteFoods: ["carrots", "angelwort"]},
   {name: "Murderbot", age: 19, favoriteFoods: ["chicken liver", "spiders", "fancy feast"]},
@@ -60,11 +51,16 @@ console.log("My dog " + arrayOfPeople[2].name + " is " + arrayOfPeople[2].age   
 
 
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create()
-  done(null , data);
-}; 
-
-
+  //model.create([array], [options], callback)
+  console.log("we started definiting createManyPeople")
+  Person.create(arrayOfPeople, (err, people) => {
+    console.log("we started the model.create function")
+  if (err) {
+    return console.error(err)
+  }   
+  done(null , people);
+  })
+}
 
 const findPeopleByName = (personName, done) => {
   done(null /*, data*/);
