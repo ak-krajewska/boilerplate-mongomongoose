@@ -27,23 +27,23 @@ let createAndSavePerson = (done) => {
 
   //console.log("Test if I created fuzzyBear. His name is: " + fuzzyBear.name)
 
-/*
-//why does this es6 style version of the document.save function not work?
-  fuzzyBear.save = (err, data) => {
+
+//Fixed error. document.save() needed anonymous function as a callback
+  fuzzyBear.save((err, data) => {
       console.log("we started the document.save function")
       if (err) {
         return console.error(err)
       } 
       done(null, data)  
-    } 
-   */ 
- 
+    }) 
+   
+ /*
   fuzzyBear.save(function(err, data) {
     console.log("we started the document.save function")
     if (err) return console.error(err);
     console.log("we got past the error if")
     done(null, data)
-  });
+  }); */
 };
 
 
@@ -58,10 +58,13 @@ let arrayOfPeople = [
 
 console.log("My dog " + arrayOfPeople[2].name + " is " + arrayOfPeople[2].age   + " years old and would like to eat " + arrayOfPeople[2].favoriteFoods[0] + " and " +  arrayOfPeople[2].favoriteFoods[1] + ".")
 
+
 const createManyPeople = (arrayOfPeople, done) => {
   Person.create()
-  done(null /*, data*/);
-};
+  done(null , data);
+}; 
+
+
 
 const findPeopleByName = (personName, done) => {
   done(null /*, data*/);
