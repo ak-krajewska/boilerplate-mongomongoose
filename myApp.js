@@ -47,8 +47,19 @@ let createAndSavePerson = (done) => {
 };
 
 
+//Create Many Records with model.create()
+
+//Create an array of people
+let arrayOfPeople = [
+  {name: "Flufykins", age: 3, favoriteFoods: ["carrots", "angelwort"]},
+  {name: "Murderbot", age: 19, favoriteFoods: ["chicken liver", "spiders", "fancy feast"]},
+  {name: "Rex", age: 5, favoriteFoods: ["cheese", "whatever you are eating"]}
+]
+
+console.log("My dog " + arrayOfPeople[2].name + " is " + arrayOfPeople[2].age   + " years old and would like to eat " + arrayOfPeople[2].favoriteFoods[0] + " and " +  arrayOfPeople[2].favoriteFoods[1] + ".")
 
 const createManyPeople = (arrayOfPeople, done) => {
+  Person.create()
   done(null /*, data*/);
 };
 
