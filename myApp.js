@@ -16,11 +16,37 @@ const personSchema = new Schema({
 
 const Person = mongoose.model('Person', personSchema);
 
-//let Person;
+//Create and Save a Record of a Model
 
-const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+let createAndSavePerson = (done) => {
+  let fuzzyBear = new Person({
+    name: "Fuzzy the Bear", 
+    age: 7, 
+    favoriteFoods: ["tea", "honey", "marmalade"]
+      });
+
+  //console.log("Test if I created fuzzyBear. His name is: " + fuzzyBear.name)
+
+/*
+//why does this es6 style version of the document.save function not work?
+  fuzzyBear.save = (err, data) => {
+      console.log("we started the document.save function")
+      if (err) {
+        return console.error(err)
+      } 
+      done(null, data)  
+    } 
+   */ 
+ 
+  fuzzyBear.save(function(err, data) {
+    console.log("we started the document.save function")
+    if (err) return console.error(err);
+    console.log("we got past the error if")
+    done(null, data)
+  });
 };
+
+
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
