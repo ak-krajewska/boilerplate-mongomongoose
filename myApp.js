@@ -79,8 +79,22 @@ const findPeopleByName = (personName, done) => {
     }) 
 };
 
+//Use model.findOne() to Return a Single Matching Document from Your Database
+
+/*
+Modify the findOneByFood function to find just one person which has a certain food in the person's favorites, using Model.findOne() -> Person. Use the function argument food as search key.
+
+Doc https://mongoosejs.com/docs/api/model.html#model_Model.findOne
+*/
+
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({favoriteFoods: food}, (err, personFound) => {
+    console.log("we started the model.findOne function")
+    if (err) {
+      return console.error(err)
+    }
+    done(null, personFound);
+    }) 
 };
 
 const findPersonById = (personId, done) => {
