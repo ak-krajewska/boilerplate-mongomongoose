@@ -49,7 +49,6 @@ let arrayOfPeople = [
 
 console.log("My dog " + arrayOfPeople[2].name + " is " + arrayOfPeople[2].age   + " years old and would like to eat " + arrayOfPeople[2].favoriteFoods[0] + " and " +  arrayOfPeople[2].favoriteFoods[1] + ".")
 
-
 const createManyPeople = (arrayOfPeople, done) => {
   //model.create([array], [options], callback)
   console.log("we started definiting createManyPeople")
@@ -62,8 +61,22 @@ const createManyPeople = (arrayOfPeople, done) => {
   })
 }
 
+//Use model.find() to Search Your Database
+/*
+Modify the findPeopleByName function to find all the people having a given name, using Model.find() -> [Person]
+
+Use the function argument personName as the search key.
+*/
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  console.log("Starting findPeopleByName defintion")
+  //use model.find(filter, [projections], [options], [callback])
+  Person.find({name: personName}, (err, personFound) => {
+    console.log("we started the model.find function")
+    if (err) {
+      return console.error(err)
+    }
+    done(null, personFound);
+    }) 
 };
 
 const findOneByFood = (food, done) => {
