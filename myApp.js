@@ -97,8 +97,21 @@ const findOneByFood = (food, done) => {
     }) 
 };
 
+//Use model.findById() to Search Your Database By _id
+/*
+Modify the findPersonById to find the only person having a given _id, using Model.findById() -> Person. Use the function argument personId as the search key.
+
+Doc https://mongoosejs.com/docs/api/model.html#model_Model.findById
+*/
+
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, (err, idFound) => {
+    console.log("we started model.findById function")
+    if (err) {
+      return console.error(err)
+    }
+    done(null, idFound);
+  }) 
 };
 
 const findEditThenSave = (personId, done) => {
