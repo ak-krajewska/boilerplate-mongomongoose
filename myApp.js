@@ -104,9 +104,9 @@ Modify the findPersonById to find the only person having a given _id, using Mode
 Doc https://mongoosejs.com/docs/api/model.html#model_Model.findById
 */
 
+
 const findPersonById = (personId, done) => {
   Person.findById(personId, (err, idFound) => {
-    console.log("we started model.findById function")
     if (err) {
       return console.error(err)
     }
@@ -114,10 +114,22 @@ const findPersonById = (personId, done) => {
   }) 
 };
 
-const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
 
-  done(null /*, data*/);
+//Perform Classic Updates by Running Find, Edit, then Save
+const findEditThenSave = (personId, done) => {
+  const foodToAdd = "hamburger" 
+
+  Person.findById(personId, (err, personFound) => {
+    console.log("we started model.findById function")
+    if (err) return console.error(err)
+    
+    //add hamburger to their favorite foods array
+    personFound.favoriteFoods.push(foodToAdd)
+    personFound.save((err, updatedPerson) => {
+      if(err) return console.log(err)
+      done(null, updatedPerson)
+    }) 
+  })
 };
 
 const findAndUpdate = (personName, done) => {
