@@ -151,8 +151,15 @@ const findAndUpdate = (personName, done) => {
   })
 };
 
+// Delete One Document Using model.findByIdAndRemove
+// Modify the removeById function to delete one person by the person's _id. You should use one of the methods findByIdAndRemove() or findOneAndRemove().
+// https://mongoosejs.com/docs/api/model.html#model_Model.findByIdAndRemove
+
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findByIdAndRemove(personId, (err, removedDoc) => {
+    if(err) return console.log(err)
+    done(null, removedDoc);
+  })
 };
 
 const removeManyPeople = (done) => {
