@@ -132,10 +132,23 @@ const findEditThenSave = (personId, done) => {
   })
 };
 
+// Perform New Updates on a Document Using model.findOneAndUpdate()
+/*
+Modify the findAndUpdate function to find a person by Name and set the person's age to 20. Use the function parameter personName as the search key.
+
+Note: You should return the updated document. To do that, you need to pass the options document { new: true } as the 3rd argument to findOneAndUpdate(). By default, these methods return the unmodified object.
+
+https://mongoosejs.com/docs/api/model.html#model_Model.findOneAndUpdate
+*/
+
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  
+  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, {new: true}, (err, updatedDoc) => {
+    if(err) return console.log(err)
+    done(null, updatedDoc);
+    console.log(updatedDoc)
+  })
 };
 
 const removeById = (personId, done) => {
