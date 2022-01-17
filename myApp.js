@@ -162,10 +162,34 @@ const removeById = (personId, done) => {
   })
 };
 
+// Delete Many Documents with model.remove()
+/*
+Modify the removeManyPeople function to delete all the people whose name is within the variable nameToRemove, using Model.remove(). Pass it to a query document with the name field set, and a callback.
+
+Note: The Model.remove() doesn’t return the deleted document, but a JSON object containing the outcome of the operation, and the number of items affected. Don’t forget to pass it to the done() callback, since we use it in tests.
+*/
+/*
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
+  Person.remove({name: nameToRemove}, (err, response) => {
+    if(err) return console.log(err);
+    console.log(response)
+    done(null, response);
+  })
+};*/
 
-  done(null /*, data*/);
+// use Model.deleteMany instead bcs Model.remove is deprecated
+
+const removeManyPeople = (done) => {
+  const nameToRemove = "Mary";
+  Person.deleteMany({name: nameToRemove}, (err, response) => {
+    if(err) return console.log(err);
+    console.log(response) // verifies that json count of removed docs is returned
+    // tests don't pause w/ error 
+    // SyntaxError: Unexpected token o in JSON at position 1
+    // supsect that issue is in tests, as even example solution fails
+    done(null, response); 
+  })
 };
 
 const queryChain = (done) => {
